@@ -26,8 +26,8 @@ colourClock = function(){
         
         // position title
         var title = document.getElementById("title");
-        title.style.left = "5px";
-        title.style.top = "5px";
+        title.style.left = "10px";
+        title.style.top = "10px";
         
         // position clock
         var clock = document.getElementById("clock");
@@ -66,12 +66,12 @@ colourClock = function(){
         
         // position footer1
         var footer1 = document.getElementById("footer1");
-        footer1.style.left = "5px";
-        footer1.style.top = container.offsetHeight - footer1.offsetHeight - 5 + "px";
+        footer1.style.left = "10px";
+        footer1.style.top = container.offsetHeight - footer1.offsetHeight - 10 + "px";
         
         // position footer2
         var footer2 = document.getElementById("footer2");
-        footer2.style.left = container.offsetWidth - footer2.offsetWidth - 7 + "px";
+        footer2.style.left = container.offsetWidth - footer2.offsetWidth - 12 + "px";
         footer2.style.top = footer1.offsetTop + "px";
     }
     

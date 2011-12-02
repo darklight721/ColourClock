@@ -55,7 +55,7 @@ a:hover
 	font-family:Trebuchet MS;
 	font-size:200px;
 	line-height:200px;
-	text-shadow: -1px -1px rgba(50,50,50,0.2);
+	/*text-shadow: -1px -1px rgba(50,50,50,0.2);*/
 	color: rgba(255,255,255,0.7);
 	
 	overflow:hidden;

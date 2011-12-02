@@ -16,7 +16,11 @@ colourClock = function(){
     }
     
     function positionControls()
-    {   
+    {
+		// size body
+		document.body.style.width = window.innerWidth + "px";
+		document.body.style.height = window.innerHeight + "px";
+		
         // position container
         var container = document.getElementById("container");
         container.style.left = "5px";

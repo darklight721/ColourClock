@@ -136,32 +136,13 @@ colourClock = function(){
     
     function numToHex(num)
     {
-        var hex = ["0","0"];
-		var index = 1;
-		do
+		var hex = num.toString(16);
+		if (hex.length === 1)
 		{
-			hex[index] = toHex(num%16);
-			num = Math.floor(num / 16);
-			index--;
-		} while (num > 0 && index >= 0);
-
-		return hex.join("");
-    }
-    
-    function toHex(num)
-    {
-        var ret = 0;
-        switch(num)
-        {
-            case 10: ret = 'A'; break;
-			case 11: ret = 'B'; break;
-			case 12: ret = 'C'; break;
-			case 13: ret = 'D'; break;
-			case 14: ret = 'E'; break;
-			case 15: ret = 'F'; break;
-			default: ret = num.toString(); break;
-        }
-        return ret;
+			hex = "0" + hex;
+		}
+		
+		return hex;
     }
     
     function showClock()

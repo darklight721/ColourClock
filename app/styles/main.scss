@@ -1,0 +1,152 @@
+$offset: 5px;
+$off-white: rgba(#fff,0.5);
+$active-white: rgba(#fff,0.7);
+
+@mixin radial-bg($color1, $color2) {
+	background-image: -webkit-radial-gradient(center, circle farthest-side, $color1 0%, $color2 100%);
+	background-image:    -moz-radial-gradient(center, circle farthest-side, $color1 0%, $color2 100%);
+	background-image:     -ms-radial-gradient(center, circle farthest-side, $color1 0%, $color2 100%);
+	background-image:      -o-radial-gradient(center, circle farthest-side, $color1 0%, $color2 100%);
+	background-image:         radial-gradient(center, circle farthest-side, $color1 0%, $color2 100%);
+	
+}
+
+html, body {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+
+	background-color: #892030;
+	@include radial-bg(rgba(#000,0), rgba(#000,0.3));
+}
+
+div.container {
+	position: absolute;
+	margin: 0;
+	padding: 0;
+	top: $offset;
+	bottom: $offset;
+	left: $offset;
+	right: $offset;
+	
+	border: solid 1px $off-white;
+	overflow: hidden;
+}
+
+header {
+	position: absolute;
+	top: $offset;
+	left: $offset;
+
+	h1 {
+		margin: 0;
+		font-weight: normal;
+	}
+}
+
+footer {
+	position: absolute;
+	left: $offset;
+	right: $offset;
+	bottom: $offset;
+}
+
+div.clock-pane {
+	$height: 200px;
+	$width: $height * 3.25;
+	$nav-height: 15px;
+
+	position: absolute;
+	width: $width;
+	height: $height;
+	top: 50%;
+	left: 50%;
+	margin-left: -$width/2;
+	margin-top: -$height/2;
+
+	div.pane {
+		$pane-height: $height - $nav-height;
+		$divider-offset: 10px;
+
+		height: $pane-height;
+		font-size: $pane-height - $divider-offset;
+		line-height: $pane-height - $divider-offset;
+
+		text-align: center;
+		overflow: hidden;
+
+		div.divider {
+			height: 1px;
+			background-color: $off-white;
+		}
+	}
+
+	nav {
+		height: $nav-height;
+
+		overflow: hidden;
+
+		button {
+			$button-offset: 5px;
+
+			display: block;
+			float: left;
+
+			width: $width / 2 - $button-offset;
+			height: 100%;
+			margin: 0;
+			padding: 0;
+			border: none;
+			outline: none;
+
+			background-color: $off-white;
+			cursor: pointer;
+
+			&:first-of-type {
+				margin-right: $button-offset;
+			}
+
+			&:last-of-type {
+				margin-left: $button-offset;
+			}
+
+			&.active {
+				background-color: $active-white;
+			}
+		}
+	}
+}
+
+button {
+	
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+
+	&:hover {
+		text-decoration: underline;
+	}
+}
+
+.text {
+	display: block;
+	font-family: Verdana, sans-serif;
+	font-size: 0.75em;
+	text-transform: uppercase;
+	color: $off-white;
+}
+
+.highlight {
+	color: $active-white; 
+}
+
+.pull-right {
+	position: absolute;
+	top: 0;
+	right: $offset;
+}
+
+

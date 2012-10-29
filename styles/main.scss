@@ -18,6 +18,17 @@ $active-white: rgba(#fff,0.7);
 	        transition: $property $duration;
 }
 
+@font-face {
+	font-family: 'icomoon';
+	src:url('fonts/icomoon.eot');
+	src:url('fonts/icomoon.eot?#iefix') format('embedded-opentype'),
+		url('fonts/icomoon.svg#icomoon') format('svg'),
+		url('fonts/icomoon.woff') format('woff'),
+		url('fonts/icomoon.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
 html, body {
 	width: 100%;
 	height: 100%;
@@ -63,8 +74,8 @@ footer {
 }
 
 div.clock-pane {
-	$height: 200px;
-	$width: $height * 3.25;
+	$height: 225px;
+	$width: $height * 3.56;
 	$nav-height: 15px;
 
 	position: absolute;
@@ -84,8 +95,10 @@ div.clock-pane {
 		font-size: $pane-height - $divider-offset;
 		line-height: $pane-height - $divider-offset;
 
+		font-family: 'Open Sans', sans-serif;
 		text-align: center;
 		text-transform: uppercase;
+		-webkit-font-smoothing: antialiased;
 		cursor: default;
 		overflow: hidden;
 		
@@ -160,6 +173,7 @@ a {
 	font-size: 0.75em;
 	text-transform: uppercase;
 	color: $off-white;
+	cursor: default;
 }
 
 .highlight {
@@ -172,3 +186,6 @@ a {
 	right: $offset;
 }
 
+.icon {
+	font-family: 'icomoon';
+}

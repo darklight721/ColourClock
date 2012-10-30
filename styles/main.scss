@@ -18,11 +18,19 @@ $active-white: rgba(#fff,0.7);
 	        transition: $property $duration;
 }
 
+@mixin rotate($deg) {
+	-webkit-transform: rotate($deg);
+	   -moz-transform: rotate($deg);
+	    -ms-transform: rotate($deg);
+	     -o-transform: rotate($deg);
+	        transofrm: rotate($deg);
+}
+
 @font-face {
 	font-family: 'icomoon';
 	src:url('fonts/icomoon.eot');
 	src:url('fonts/icomoon.eot?#iefix') format('embedded-opentype'),
-		url('fonts/icomoon.svg#icomoon') format('svg'),
+		//url('fonts/icomoon.svg#icomoon') format('svg'),
 		url('fonts/icomoon.woff') format('woff'),
 		url('fonts/icomoon.ttf') format('truetype');
 	font-weight: normal;
@@ -59,6 +67,7 @@ header {
 	position: absolute;
 	top: $offset;
 	left: $offset;
+	right: $offset;
 
 	h1 {
 		margin: 0;
@@ -188,4 +197,13 @@ a {
 
 .icon {
 	font-family: 'icomoon';
+}
+
+#fullscreen-toggle {
+	cursor: pointer;
+	display: none;
+
+	&.reverse {
+		@include rotate(180deg);
+	}
 }

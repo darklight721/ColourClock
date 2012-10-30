@@ -6,6 +6,7 @@
 		hexClockEl = $('.hex-clock', pageEl),
 		buttonEl = $('div.clock-pane nav button');
 	
+	// this is the main fn that sets the time; gets called every 1 sec.
 	function setClock() {
 		// get current time
 		var time = new Date(),
@@ -38,14 +39,15 @@
 		);
 	}
 	
+	// prefixes 0 to single digits
 	function zeroPrePad(num) {
-		num += ''; // make string
+		num += ''; // convert to string
 		return num.length === 1 ? '0' + num : num;
 	}
 	
 	function getColor(num, div) {
 		div = div || 1;
-		return Math.floor(num * (255 / div));
+		return Math.floor(255 / div * num);
 	}
 	
 	function toHex(num) {
@@ -55,7 +57,7 @@
 	// set clock every 1 sec
 	window.setInterval(setClock, 1000);
 	
-	// attach click event handler to nav buttons
+	// attach event to nav buttons to toggle between clock and hex clock
 	buttonEl.click(function(){
 		var thisEl = $(this);
 		
@@ -67,6 +69,51 @@
 		}
 		else {
 			pageEl.addClass('scroll-to-hex');
+		}
+	});
+
+	// fullscreen toggle codes below
+	var body = bodyEl[0],
+		fsToggleEl = $('#fullscreen-toggle');
+
+	// normalize fullscreen api's
+	if (body.webkitRequestFullScreen) {
+		body.requestFullScreen = body.webkitRequestFullScreen;
+		document.cancelFullScreen = document.webkitCancelFullScreen;
+	}
+	else if (body.mozRequestFullScreen) {
+		body.requestFullScreen = body.mozRequestFullScreen;
+		document.cancelFullScreen = document.mozCancelFullScreen;
+	}
+
+	function isFullScreen() {
+		return  document.fullScreenElement ? true :
+				document.webkitIsFullScreen ? true :
+				document.mozFullScreenElement ? true :
+				false;
+	}
+
+	// show toggle button only when fullscreen is supported
+	if (body.requestFullScreen) {
+		fsToggleEl.show();
+	}
+
+	// toggle fullscreen
+	fsToggleEl.click(function(){
+		if (isFullScreen()) {
+			document.cancelFullScreen();
+		}
+		else {
+			body.requestFullScreen();
+		}
+	});
+
+	$(document).on('webkitfullscreenchange mozfullscreenchange fullscreenchange', function(){
+		if (isFullScreen()) {
+			fsToggleEl.addClass('reverse');
+		}
+		else {
+			fsToggleEl.removeClass('reverse');
 		}
 	});
 	

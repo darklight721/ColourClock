@@ -1,0 +1,236 @@
+$offset: 5px;
+$off-white: rgba(#fff,0.5);
+$active-white: rgba(#fff,0.7);
+
+@mixin radial-bg($color1, $color2) {
+	background-image: -webkit-radial-gradient(center, circle farthest-side, $color1 0%, $color2 100%);
+	background-image:    -moz-radial-gradient(center, circle farthest-side, $color1 0%, $color2 100%);
+	background-image:     -ms-radial-gradient(center, circle farthest-side, $color1 0%, $color2 100%);
+	background-image:      -o-radial-gradient(center, circle farthest-side, $color1 0%, $color2 100%);
+	background-image:         radial-gradient(center, circle farthest-side, $color1 0%, $color2 100%);
+}
+
+@mixin transition($property, $duration) {
+	-webkit-transition: $property $duration;
+	   -moz-transition: $property $duration;
+	    -ms-transition: $property $duration;
+	     -o-transition: $property $duration;
+	        transition: $property $duration;
+}
+
+@mixin rotate($deg) {
+	-webkit-transform: rotate($deg);
+	   -moz-transform: rotate($deg);
+	    -ms-transform: rotate($deg);
+	     -o-transform: rotate($deg);
+	        transform: rotate($deg);
+}
+
+@font-face {
+	font-family: 'icomoon';
+	src:url('fonts/icomoon.eot');
+	src:url('fonts/icomoon.eot?#iefix') format('embedded-opentype'),
+		url('fonts/icomoon.svg#icomoon') format('svg'),
+		url('fonts/icomoon.woff') format('woff'),
+		url('fonts/icomoon.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+html, body {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	background-color: #555;
+	@include radial-bg(rgba(#000,0), rgba(#000,0.3));
+	@include transition(background-color, 0.9s);
+}
+
+div.container {
+	position: absolute;
+	margin: 0;
+	padding: 0;
+	top: $offset;
+	bottom: $offset;
+	left: $offset;
+	right: $offset;
+	
+	border: solid 1px $off-white;
+	overflow: hidden;
+}
+
+header {
+	position: absolute;
+	top: $offset;
+	left: $offset;
+	right: $offset;
+
+	h1 {
+		margin: 0;
+		font-weight: normal;
+	}
+}
+
+footer {
+	position: absolute;
+	left: $offset;
+	right: $offset;
+	bottom: $offset;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+
+	&:hover {
+		text-decoration: underline;
+	}
+}
+
+div.clock-pane {
+	div.pane {
+		font-family: 'Open Sans', sans-serif;
+		text-align: center;
+		text-transform: uppercase;
+		-webkit-font-smoothing: antialiased;
+		cursor: default;
+		overflow: hidden;
+		
+		div.page {
+			@include transition(top, 0.9s);
+		}
+
+		div.divider {
+			height: 1px;
+			background-color: $off-white;
+		}
+	}
+
+	nav {
+		overflow: hidden;
+
+		button {
+			display: block;
+			float: left;
+			
+			margin: 0;
+			padding: 0;
+			border: none;
+			outline: none;
+
+			background-color: $off-white;
+			cursor: pointer;
+			
+			@include transition(background-color, 0.9s);
+
+			&.active {
+				background-color: $active-white;
+			}
+		}
+	}
+}
+
+@mixin clock-dimension($height) {
+	div.clock-pane {
+		$nav-height: 15px;
+		$width: $height * 3.56;
+
+		position: absolute;
+		width: $width;
+		height: $height;
+		top: 50%;
+		left: 50%;
+		margin-left: -$width/2;
+		margin-top: -$height/2;
+
+		div.pane {
+			$pane-height: $height - $nav-height;
+			$divider-offset: 10px;
+
+			position: relative;
+			width: 100%;
+			height: $pane-height;
+			font-size: $pane-height - $divider-offset;
+			line-height: $pane-height - $divider-offset;
+
+			div.page {
+				position: absolute;
+				width: 100%;
+				top: 0;
+
+				&.scroll-to-hex {
+					top: -($pane-height - $divider-offset);
+				}
+			}
+		}
+
+		nav {
+			width: 100%;
+			height: $nav-height;
+
+			button {
+				$button-offset: 5px;
+
+				width: $width / 2 - $button-offset;
+				height: 100%;
+
+				&:first-of-type {
+					margin-right: $button-offset;
+				}
+
+				&:last-of-type {
+					margin-left: $button-offset;
+				}
+			}
+		}
+	}
+}
+
+.text {
+	display: block;
+	font-family: Verdana, sans-serif;
+	font-size: 0.75em;
+	text-transform: uppercase;
+	color: $off-white;
+	cursor: default;
+}
+
+.highlight {
+	color: $active-white; 
+}
+
+.pull-right {
+	position: absolute;
+	top: 0;
+	right: $offset;
+}
+
+.icon {
+	font-family: 'icomoon';
+}
+
+#fullscreen-toggle {
+	cursor: pointer;
+	display: none;
+
+	&.reverse {
+		@include rotate(180deg);
+	}
+}
+
+@include clock-dimension(225px);
+
+@media screen and (max-width: 800px) {
+	@include clock-dimension(160px);
+}
+
+@media screen and (max-width: 560px) {
+	@include clock-dimension(90px);
+	header span.text, footer {
+		display: none;
+	}
+}
